@@ -5,6 +5,7 @@ import dev.alphacodez.marketplace.config.Utility;
 import dev.alphacodez.marketplace.store.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,6 +24,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.fetchAllProducts());
     }
 
+//    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@ModelAttribute ProductDto request) throws IOException {
 

@@ -22,10 +22,11 @@ import java.util.Map;
 public class AuthenticationController {
     private final AuthenticationService service;
     private final JwtService jwtService;
+    private final HttpServletRequest httpServletRequest;
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> loginUser(@RequestBody AuthenticationEntity request) {
-        AuthenticationResponse res = service.authenticateUser(request);
+
         return ResponseEntity.ok(service.authenticateUser(request));
     }
     @PostMapping("/register")
@@ -35,10 +36,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            new SecurityContextLogoutHandler().logout(request,response,authentication);
+            httpServletRequest.logout();
             return "logged out";
         }
         return "failed!!";

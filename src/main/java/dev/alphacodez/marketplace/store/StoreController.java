@@ -20,7 +20,7 @@ public class StoreController {
     private final StoreService service;
 
     @GetMapping
-    public ResponseEntity<?> getAllStores() {
+    public ResponseEntity<List<StoreResponseDto>> getAllStores() {
         System.out.println(SecurityContextHolder.getContext().getAuthentication());
 
         return ResponseEntity.ok(service.getAllStores());

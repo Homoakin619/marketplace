@@ -37,12 +37,16 @@ public class StoreService {
     }
 
     public List<StoreResponseDto> getAllStores() {
+        System.out.println("first");
         List<Store> rawValues = repository.findAll();
+        System.out.println("second");
         List<StoreResponseDto> stores = new ArrayList<>();
+        System.out.println("third");
         for(Store store : rawValues) {
             StoreResponseDto instance = new StoreResponseDto(store.getTitle(), store.getAddress(), store.getImageUrl());
             stores.add(instance);
         }
+        System.out.println("fourth");
         System.out.println(stores.toString());
         return stores;
     }

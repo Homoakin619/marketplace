@@ -20,7 +20,6 @@ public class ProductService {
     private final StoreRepository storeRepository;
 
     public String createProduct(ProductDto request) throws IOException {
-        System.out.println(request);
         MultipartFile image = request.getImage();
         User user = utility.getAuthenticatedUser();
         Store store = user.getStore();

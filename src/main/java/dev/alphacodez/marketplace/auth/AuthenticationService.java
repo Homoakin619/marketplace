@@ -38,14 +38,16 @@ public class AuthenticationService {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getEmail(), request.getPassword()
             ));
+            System.out.println("Passed");
 
         } catch (Exception e) {
             System.out.println(e);
+            throw new IllegalStateException("Exception Occured");
         }
 
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User does not exist"));
-        System.out.println(user.getUsername());
+
         String jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()

@@ -20,6 +20,7 @@ public class Product {
     @Column(nullable = false)
     private String title;
     private String imageUrl;
+//   to add later on:-- product category
     private String description;
     @Column(nullable = false)
     private Double price;
