@@ -20,14 +20,22 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<?> allProducts() {
-
         return ResponseEntity.ok(productService.fetchAllProducts());
     }
 
 //    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@ModelAttribute ProductDto request) throws IOException {
-
         return ResponseEntity.ok(productService.createProduct(request));
+    }
+
+    @GetMapping("/products/price")
+    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam String category,@RequestParam Double price ) {
+        return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
+    }
+
+    @GetMapping("/products/category")
+    public ResponseEntity<?> fetchProductsByCategory(@RequestParam String category) {
+        return ResponseEntity.ok(productService.fetchProductsByCategory(category));
     }
 }

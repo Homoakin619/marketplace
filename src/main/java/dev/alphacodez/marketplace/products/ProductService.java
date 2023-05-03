@@ -5,6 +5,7 @@ import dev.alphacodez.marketplace.store.Store;
 import dev.alphacodez.marketplace.store.StoreRepository;
 import dev.alphacodez.marketplace.users.User;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,8 +37,7 @@ public class ProductService {
         return "Product created Successfully";
     }
 
-    public List<ProductDto> fetchAllProducts() {
-        List<Product> products = repository.findAll();
+    public List<ProductDto> convertProductToDto(@NotNull List<Product> products) {
         List<ProductDto> result = new ArrayList<>();
         for (Product product : products) {
             ProductDto instance = new ProductDto(product.getTitle(),product.getImageUrl(),
@@ -45,5 +45,20 @@ public class ProductService {
             result.add(instance);
         }
         return result;
+    }
+
+    public List<ProductDto> fetchAllProducts() {
+        List<Product> products = repository.findAll();
+        return convertProductToDto(products);
+    }
+
+    public List<ProductDto> fetchProductsByCategory(String category) {
+        List<Product> result = repository.findByCategory(category);
+        return convertProductToDto(result);
+    }
+
+    public List<ProductDto> fetchProductsByCategoryAndPriceRange(String category, Double priceRange) {
+        List<Product> result = repository.findByCategoryAndPriceRange(category,priceRange);
+        return convertProductToDto(result);
     }
 }

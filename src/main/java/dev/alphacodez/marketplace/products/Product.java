@@ -21,11 +21,14 @@ public class Product {
     private String title;
     private String imageUrl;
 //   to add later on:-- product category
+    @Enumerated(EnumType.STRING)
+    private ProductCategoryEnum category;
     private String description;
     @Column(nullable = false)
     private Double price;
     private boolean isDiscounted = false;
     private Long discountPrice;
+    private boolean outOfStock = false ;
     @ManyToOne
     private Store store;
     
