@@ -1,6 +1,7 @@
 package dev.alphacodez.marketplace.auth;
 
 import dev.alphacodez.marketplace.config.security.JwtService;
+import dev.alphacodez.marketplace.exceptions.UserExistsException;
 import dev.alphacodez.marketplace.users.Role;
 import dev.alphacodez.marketplace.users.User;
 import dev.alphacodez.marketplace.users.UserRepository;
@@ -21,8 +22,11 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse createUser(RegistrationEntity request) {
-;
+    public AuthenticationResponse createUser(RegistrationEntity request) throws UserExistsException {
+
+        if(repository.findByEmail(request.getEmail()).isPresent())
+            throw new UserExistsException("Email is taken. Kindly use another valid email");
+
         User user = new User(request.getName(), request.getEmail(),
                 passwordEncoder.encode(request.getPassword()), request.getPhone(),Role.USER );
         repository.save(user);

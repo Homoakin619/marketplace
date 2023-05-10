@@ -57,8 +57,8 @@ public class ProductService {
         return convertProductToDto(result);
     }
 
-    public List<ProductDto> fetchProductsByCategoryAndPriceRange(String category, Double priceRange) {
-        List<Product> result = repository.findByCategoryAndPriceRange(category,priceRange);
-        return convertProductToDto(result);
-    }
+//    public List<ProductDto> fetchProductsByCategoryAndPriceRange(String category, Double priceRange) {
+//        List<Product> result = repository.findByCategoryAndPriceRange(category,priceRange);
+//        return convertProductToDto(result);
+//    }
 }

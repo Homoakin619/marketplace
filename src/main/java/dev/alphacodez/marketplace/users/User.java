@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @JsonIgnoreProperties("user")
     private Store store;
     @OneToMany(mappedBy = "user")
-    private BillingAddress address;
+    private List<BillingAddress> address;
 
     public User(String name, String email, String password, Long phone, Role role) {
         this.name = name;

@@ -29,10 +29,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.createProduct(request));
     }
 
-    @GetMapping("/products/price")
-    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam String category,@RequestParam Double price ) {
-        return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
-    }
+//    @GetMapping("/products/price")
+//    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam String category,@RequestParam Double price ) {
+//        return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
+//    }
 
     @GetMapping("/products/category")
     public ResponseEntity<?> fetchProductsByCategory(@RequestParam String category) {
