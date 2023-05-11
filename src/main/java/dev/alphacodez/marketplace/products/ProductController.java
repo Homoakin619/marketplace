@@ -29,10 +29,18 @@ public class ProductController {
         return ResponseEntity.ok(productService.createProduct(request));
     }
 
-//    @GetMapping("/products/price")
-//    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam String category,@RequestParam Double price ) {
-//        return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
+//    @GetMapping("/products")
+//    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam("category") String category,@RequestParam("price") Double price ) {
+//        if (category!=null && price != null){
+//            return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
+//        }
+//        return ResponseEntity.ok(productService.fetchProductsByPriceRange(price));
 //    }
+
+    @GetMapping("/products")
+    public ResponseEntity<?> fetchProductsByPriceRange(@RequestParam("price") Double price) {
+        return ResponseEntity.ok(productService.fetchProductsByPriceRange(price));
+    }
 
     @GetMapping("/products/category")
     public ResponseEntity<?> fetchProductsByCategory(@RequestParam String category) {

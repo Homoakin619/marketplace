@@ -21,10 +21,16 @@ public class ProductService {
     private final StoreRepository storeRepository;
 
     public String createProduct(ProductDto request) throws IOException {
-        MultipartFile image = request.getImage();
+        MultipartFile image;
+        String url = "";
+
+        if (!request.getImage().isEmpty()) {
+            image = request.getImage();
+            url = utility.createImageUpload(image,"product-images");
+        }
+
         User user = utility.getAuthenticatedUser();
         Store store = user.getStore();
-        String url = utility.createImageUpload(image,"product-images");
 
         var product = Product.builder()
                 .title(request.getTitle())
@@ -57,8 +63,14 @@ public class ProductService {
         return convertProductToDto(result);
     }
 
-//    public List<ProductDto> fetchProductsByCategoryAndPriceRange(String category, Double priceRange) {
-//        List<Product> result = repository.findByCategoryAndPriceRange(category,priceRange);
-//        return convertProductToDto(result);
-//    }
+
+    public List<ProductDto> fetchProductsByPriceRange(Double priceRange) {
+        List<Product> result = repository.findByPriceRange(priceRange);
+        return convertProductToDto(result);
+    }
+
+    public List<ProductDto> fetchProductsByCategoryAndPriceRange(String category, Double priceRange) {
+        List<Product> result = repository.findByCategoryAndPriceRange(category,priceRange);
+        return convertProductToDto(result);
+    }
 }
