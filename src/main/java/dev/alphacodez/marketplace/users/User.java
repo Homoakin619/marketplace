@@ -1,7 +1,9 @@
 package dev.alphacodez.marketplace.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import dev.alphacodez.marketplace.cart.BillingAddress;
+import dev.alphacodez.marketplace.billings.BillingAddress;
+import dev.alphacodez.marketplace.cart.Cart;
+import dev.alphacodez.marketplace.cart.OrderItem;
 import dev.alphacodez.marketplace.store.Store;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,8 +39,15 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     @JsonIgnoreProperties("user")
     private Store store;
+
     @OneToMany(mappedBy = "user")
     private List<BillingAddress> address;
+
+    @OneToMany(mappedBy = "user")
+    private List<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "user")
+    private List<Cart> carts;
 
     public User(String name, String email, String password, Long phone, Role role) {
         this.name = name;

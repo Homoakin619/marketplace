@@ -9,4 +9,6 @@ import lombok.ToString;
 @ToString
 public class AuthenticationResponse {
     private String token;
+    private boolean success = false;
+    private String email = "";
 }

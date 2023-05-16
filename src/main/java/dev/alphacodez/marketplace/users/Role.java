@@ -1,5 +1,5 @@
 package dev.alphacodez.marketplace.users;
 
 public enum Role {
-    USER,ADMIN
+    ADMIN,STAFF,USER
 }

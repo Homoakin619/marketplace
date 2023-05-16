@@ -31,7 +31,7 @@ public class ProductController {
 
 //    @GetMapping("/products")
 //    public ResponseEntity<?> fetchProductsByPriceAndCategory(@RequestParam("category") String category,@RequestParam("price") Double price ) {
-//        if (category!=null && price != null){
+//        if (category != null && price != null){
 //            return ResponseEntity.ok(productService.fetchProductsByCategoryAndPriceRange(category, price));
 //        }
 //        return ResponseEntity.ok(productService.fetchProductsByPriceRange(price));

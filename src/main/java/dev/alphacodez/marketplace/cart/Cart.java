@@ -1,5 +1,8 @@
 package dev.alphacodez.marketplace.cart;
 
+import dev.alphacodez.marketplace.payments.Payment;
+import dev.alphacodez.marketplace.users.User;
+import dev.alphacodez.marketplace.utilities.IdGenerator;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,15 +19,28 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public Cart(User user) {
+        this.orderId = IdGenerator.generateId();
+        this.user = user;
+    }
+
     private String orderId;
+
+    @ManyToOne
+    private User user;
+
+    @OneToOne(mappedBy = "cart")
+    private Payment payment;
+
     @OneToMany(mappedBy = "cart")
-    private List<Order> orders;
+    private List<OrderItem> items;
+
     private boolean isCompleted = false;
-    private Double cartTotal;
 
     public double getCartTotal(){
         double total = 0;
-        for (Order order: orders) {
+        for (OrderItem order: items) {
             total += order.getOrderTotal();
         }
         return total;

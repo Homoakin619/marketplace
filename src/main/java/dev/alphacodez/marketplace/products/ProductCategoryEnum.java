@@ -1,7 +1,8 @@
 package dev.alphacodez.marketplace.products;
 
 public enum ProductCategoryEnum {
-    ELECTRICITY,
+    ELECTRONICS,
+    WEARS,
     HOME_AND_KITCHEN,
     HAIRS_AND_WIGS,
     OTHERS

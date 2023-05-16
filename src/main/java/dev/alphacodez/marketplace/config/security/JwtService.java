@@ -22,6 +22,10 @@ public class JwtService {
         return extractClaim(jwtToken,Claims::getIssuer);
     }
 
+    public Date futureDate(int days) {
+        int future = 1000 * 3600 * 24 * days;
+        return new Date(System.currentTimeMillis() + future );
+    }
     public String generateToken(UserDetails userDetails) {
         return generateToken(userDetails,new HashMap<>());
     }
@@ -31,20 +35,11 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setIssuer(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 3600 * 24))
+                .setExpiration(futureDate(10))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    //    public String generateToken(Map<String,Object> extraClaims,UserDetails userDetails) {
-//        return Jwts.builder()
-//                .setSubject(userDetails.getUsername())
-//                .setClaims(extraClaims)
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 3600 * 24))
-//                .signWith(getSigningKey(),SignatureAlgorithm.HS256)
-//                .compact();
-//    }
 
     public Date getTokenExpiry(String token) {
         return extractClaim(token,Claims::getExpiration);

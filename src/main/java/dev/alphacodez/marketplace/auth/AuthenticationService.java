@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 
 @RequiredArgsConstructor
 @Service
@@ -56,13 +58,13 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .success(true)
+                .email(request.getEmail())
                 .build();
     }
 
     public boolean validateToken(TokenAuth request) {
         String token = request.getToken();
-        System.out.println("Getting ContextHolder: .....");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
 
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
