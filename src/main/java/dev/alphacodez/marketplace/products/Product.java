@@ -1,6 +1,7 @@
 package dev.alphacodez.marketplace.products;
 
 import dev.alphacodez.marketplace.store.Store;
+import dev.alphacodez.marketplace.users.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,9 @@ public class Product {
     private boolean outOfStock = false ;
     @ManyToOne
     private Store store;
+    @ManyToOne
+    private User user;
+
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    private Order order;
     

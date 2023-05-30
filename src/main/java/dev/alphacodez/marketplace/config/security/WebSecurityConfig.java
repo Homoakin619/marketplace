@@ -25,6 +25,8 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(
                     auth -> {
                         auth.requestMatchers("api/v1/auth/**").permitAll();
+                        auth.requestMatchers("api/v1/products/**").permitAll();
+//                        auth.requestMatchers("api/v1/staff/product/**").hasRole("STAFF");
                         auth.anyRequest().authenticated();
                     }
                     )

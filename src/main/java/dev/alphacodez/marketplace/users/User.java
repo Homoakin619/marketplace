@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.alphacodez.marketplace.billings.BillingAddress;
 import dev.alphacodez.marketplace.cart.Cart;
 import dev.alphacodez.marketplace.cart.OrderItem;
+import dev.alphacodez.marketplace.products.Product;
 import dev.alphacodez.marketplace.store.Store;
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,6 +49,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Cart> carts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
 
     public User(String name, String email, String password, Long phone, Role role) {
         this.name = name;
