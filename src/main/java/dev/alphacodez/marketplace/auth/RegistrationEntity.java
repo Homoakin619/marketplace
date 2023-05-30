@@ -11,4 +11,5 @@ public class RegistrationEntity {
     private String email;
     private String password;
     private Long phone;
+    private String role;
 }
